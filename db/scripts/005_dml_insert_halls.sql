@@ -1,0 +1,7 @@
+insert into halls(name, row_count, place_count, description) values('2D', 12, 19, 'Стандартный кинозал с возможностью демонстрации фильмов в 2D формате.');
+insert into halls(name, row_count, place_count, description) values('3D', 11, 13, 'Стандартный кинозал с возможностью демонстрации фильмов в 3D формате.');
+insert into halls(name, row_count, place_count, description) values('VIP', 5, 8, 'Премиальный кинозал с возможностью демонстрации фильмов в 2D и 3D форматах. Отличительная особенность - камерная атмосфера, суперкомфортные кресла-реклайнеры с возможностью регулировки и фиксации положения спинки, подножки и сидения.');
+insert into halls(name, row_count, place_count, description) values('2D', 9, 13, 'Стандартный кинозал с возможностью демонстрации фильмов в 2D формате.');
+insert into halls(name, row_count, place_count, description) values('2D', 9, 13, 'Стандартный кинозал с возможностью демонстрации фильмов в 2D формате.');
+insert into halls(name, row_count, place_count, description) values('2D', 9, 13, 'Стандартный кинозал с возможностью демонстрации фильмов в 2D формате.');
+insert into halls(name, row_count, place_count, description) values('2D', 9, 13, 'Стандартный кинозал с возможностью демонстрации фильмов в 2D формате.');

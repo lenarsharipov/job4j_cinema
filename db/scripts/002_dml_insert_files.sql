@@ -1,0 +1,14 @@
+insert into files(name, path) values('p_avatar_put_vody.jpg', 'files/p_avatar_put_vody.jpg');
+insert into files(name, path) values('p_besprincipnye_v_derevne.jpg', 'files/p_besprincipnye_v_derevne.jpg');
+insert into files(name, path) values('p_carevna_i_tainstvennaya_gostya.jpg', 'files/p_carevna_i_tainstvennaya_gostya.jpg');
+insert into files(name, path) values('p_cheburashka.jpg', 'files/p_cheburashka.jpg');
+insert into files(name, path) values('p_chelovek_muravey_i_osa_kvantomania.jpg', 'files/p_chelovek_muravey_i_osa_kvantomania.jpg');
+insert into files(name, path) values('p_deti_kukuruzy.jpg', 'files/p_deti_kukuruzy.jpg');
+insert into files(name, path) values('p_eskortnica.jpg', 'files/p_eskortnica.jpg');
+insert into files(name, path) values('p_kot_v_sapogah_poslednee_jelanie.jpg', 'files/p_kot_v_sapogah_poslednee_jelanie.jpg');
+insert into files(name, path) values('p_na_solnce_vdol_ryadov_kukuruzy.jpg', 'files/p_na_solnce_vdol_ryadov_kukuruzy.jpg');
+insert into files(name, path) values('p_nurnberg.jpg', 'files/p_nurnberg.jpg');
+insert into files(name, path) values('p_poehavshaya.jpg', 'files/p_poehavshaya.jpg');
+insert into files(name, path) values('p_pravednik.jpg', 'files/p_pravednik.jpg');
+insert into files(name, path) values('p_sergiy_protiv_nechisti.jpg', 'files/p_sergiy_protiv_nechisti.jpg');
+insert into files(name, path) values('p_straji_vremeni.jpg', 'files/p_straji_vremeni.jpg');
