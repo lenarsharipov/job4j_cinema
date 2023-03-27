@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!--  Зависимости Bootstrap-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Кинотека</title>
+</head>
+<body>
+<div class="container-fluid p-0">
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img th:src="@{/img/logo.png}" width="200"/>
+            </a>
+
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav me-auto">
+                    <a class="nav-item nav-link" href="/">Главная</a>
+                    <a class="nav-item nav-link" th:href="@{/sessions}">Расписание</a>
+                    <a class="nav-item nav-link" th:href="@{/films}">Кинотека</a>
+                </div>
+
+                <div class="d-flex" th:if="${user.fullName == 'Гость'}">
+                    <a class="nav-link text-secondary me-3" th:href="@{/users/register}">Регистрация</a>
+                    <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
+                </div>
+                <div class="d-flex" th:if="${user.fullName != 'Гость'}">
+                    <a class="nav-link text-secondary me-3" href="#" th:text="${user.fullName}"></a>
+                    <a class="nav-link text-secondary" th:href="@{/users/logout}">Выйти</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4" >
+        <div class="row">
+            <div class="col-4">
+                <img th:src="@{/files/{fileId}(fileId=*{film.fileId})}" class="w-100" alt="No image">
+            </div>
+            <div class="col-8">
+                <div class="row">
+                <h1 th:text="${film.name}"></h1>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Год</th>
+                        <th scope="col">Возраст</th>
+                        <th scope="col">Длительность</th>
+                        <th scope="col">Жанр</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${film.year}"></td>
+                        <td th:text="|${film.minimalAge}+|"></td>
+                        <td th:text="|${film.durationInMinutes} мин|"></td>
+                        <td th:text="${film.genre}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                    <div class="row">
+                        <p th:text="${film.description}"></p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-4" >
+            <h3 align="center">Сеансы</h3>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Дата начала:</th>
+                    <th scope="col">Время начала:</th>
+                    <th scope="col">Дата окончания:</th>
+                    <th scope="col">Время окончания:</th>
+                    <th scope="col" class="col-2"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="filmSession: ${sessions}" >
+                    <div th:if="${film.id} == ${filmSession.filmId}">
+                        <td th:text="${filmSession.startDate}"></td>
+                        <td th:text="${filmSession.startTime}"></td>
+                        <td th:text="${filmSession.endDate}"></td>
+                        <td th:text="${filmSession.endTime}"></td>
+                        <td> <a class="btn btn-outline-warning w-100 btn-sm" th:href="@{/tickets/create/{id}(id=*{filmSession.id})}">Выбрать сеанс</a></td>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+</body>
+</html>
