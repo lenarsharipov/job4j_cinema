@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Film;
@@ -12,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class Sql2oFilmRepositoryTest {
     private static Sql2oFilmRepository sql2oFilmRepository;
-    private final static List<Film> FILMS = List.of(new Film(1, "На солнце, вдоль рядов кукурузы",
+    private final List<Film> films = List.of(new Film(1, "На солнце, вдоль рядов кукурузы",
                     """
                     История о небе, несбыточной мечте и подвиге,
                     поразившем весь мир. Дамир Юсупов и предположить не мог,
@@ -177,24 +178,30 @@ class Sql2oFilmRepositoryTest {
 
     @Test
     public void whenFindAllThenListsEqual() {
-        assertThat(sql2oFilmRepository.findAll()).isEqualTo(FILMS);
+        assertThat(sql2oFilmRepository.findAll()).isEqualTo(films);
     }
 
     @Test
     public void whenFindAllThenListAllFilms() {
-        assertThat(sql2oFilmRepository.findById(1).get()).isEqualTo(FILMS.get(0));
-        assertThat(sql2oFilmRepository.findById(2).get()).isEqualTo(FILMS.get(1));
-        assertThat(sql2oFilmRepository.findById(3).get()).isEqualTo(FILMS.get(2));
-        assertThat(sql2oFilmRepository.findById(4).get()).isEqualTo(FILMS.get(3));
-        assertThat(sql2oFilmRepository.findById(5).get()).isEqualTo(FILMS.get(4));
-        assertThat(sql2oFilmRepository.findById(6).get()).isEqualTo(FILMS.get(5));
-        assertThat(sql2oFilmRepository.findById(7).get()).isEqualTo(FILMS.get(6));
-        assertThat(sql2oFilmRepository.findById(8).get()).isEqualTo(FILMS.get(7));
-        assertThat(sql2oFilmRepository.findById(9).get()).isEqualTo(FILMS.get(8));
-        assertThat(sql2oFilmRepository.findById(10).get()).isEqualTo(FILMS.get(9));
-        assertThat(sql2oFilmRepository.findById(11).get()).isEqualTo(FILMS.get(10));
-        assertThat(sql2oFilmRepository.findById(12).get()).isEqualTo(FILMS.get(11));
-        assertThat(sql2oFilmRepository.findById(13).get()).isEqualTo(FILMS.get(12));
-        assertThat(sql2oFilmRepository.findById(14).get()).isEqualTo(FILMS.get(13));
+        assertThat(sql2oFilmRepository.findById(1).get()).isEqualTo(films.get(0));
+        assertThat(sql2oFilmRepository.findById(2).get()).isEqualTo(films.get(1));
+        assertThat(sql2oFilmRepository.findById(3).get()).isEqualTo(films.get(2));
+        assertThat(sql2oFilmRepository.findById(4).get()).isEqualTo(films.get(3));
+        assertThat(sql2oFilmRepository.findById(5).get()).isEqualTo(films.get(4));
+        assertThat(sql2oFilmRepository.findById(6).get()).isEqualTo(films.get(5));
+        assertThat(sql2oFilmRepository.findById(7).get()).isEqualTo(films.get(6));
+        assertThat(sql2oFilmRepository.findById(8).get()).isEqualTo(films.get(7));
+        assertThat(sql2oFilmRepository.findById(9).get()).isEqualTo(films.get(8));
+        assertThat(sql2oFilmRepository.findById(10).get()).isEqualTo(films.get(9));
+        assertThat(sql2oFilmRepository.findById(11).get()).isEqualTo(films.get(10));
+        assertThat(sql2oFilmRepository.findById(12).get()).isEqualTo(films.get(11));
+        assertThat(sql2oFilmRepository.findById(13).get()).isEqualTo(films.get(12));
+        assertThat(sql2oFilmRepository.findById(14).get()).isEqualTo(films.get(13));
+    }
+
+    @Test
+    public void whenFindByIdNotExistingThenEmptyOptional() {
+        assertThat(sql2oFilmRepository.findById(0)).isEqualTo(Optional.empty());
+        assertThat(sql2oFilmRepository.findById(15)).isEqualTo(Optional.empty());
     }
 }
