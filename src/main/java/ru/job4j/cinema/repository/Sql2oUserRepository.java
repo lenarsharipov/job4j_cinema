@@ -4,6 +4,8 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.User;
+
+import java.util.Collection;
 import java.util.Optional;
 
 @ThreadSafe
@@ -50,6 +52,24 @@ public class Sql2oUserRepository implements UserRepository {
                     .setColumnMappings(User.COLUMN_MAPPING)
                     .executeAndFetchFirst(User.class);
             return Optional.ofNullable(user);
+        }
+    }
+
+    @Override
+    public Collection<User> findAll() {
+        try (var connection = sql2o.open()) {
+            var query = connection.createQuery("SELECT * FROM users");
+            return query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetch(User.class);
+        }
+    }
+
+    @Override
+    public boolean deleteByEmail(String email) {
+        try (var connection = sql2o.open()) {
+            var query = connection.createQuery("DELETE FROM users WHERE email = :email");
+            query.addParameter("email", email);
+            var affectedRows = query.executeUpdate().getResult();
+            return affectedRows > 0;
         }
     }
 }
