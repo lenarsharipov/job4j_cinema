@@ -30,7 +30,7 @@ Checkstyle 8.42, Junit5, Assertj, H2 2.1.214, Mockito 3.5.13, Jacoco 0.8.7, Jcip
 <img src="/src/main/resources/static/img/readme/sessions.png" title="Sessions page"/>
 <br>
 <br>
-<img src="//src/main/resources/static/img/readme/ticket.png" title="Ticket page"/>
+<img src="/src/main/resources/static/img/readme/ticket.png" title="Ticket page"/>
 <br>
 <br>
 <img src="/src/main/resources/static/img/readme/success_purchase.png" title="Successful purchase page"/>
