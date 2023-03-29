@@ -3,7 +3,10 @@ package ru.job4j.cinema.controller;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.RowPlaceService;
@@ -11,7 +14,6 @@ import ru.job4j.cinema.service.SessionService;
 import ru.job4j.cinema.service.TicketService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @ThreadSafe
 @Controller
@@ -46,8 +48,8 @@ public class TicketController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(Model model, HttpServletRequest request, HttpSession session) {
-            var user = (User) session.getAttribute("user");
+    public String create(Model model, HttpServletRequest request) {
+            var user = (User) request.getSession().getAttribute("user");
             var sessionId = Integer.parseInt(request.getParameter("id"));
             var rowNumber = Integer.parseInt(request.getParameter("rowNumber"));
             var placeNumber = Integer.parseInt(request.getParameter("placeNumber"));
@@ -61,9 +63,7 @@ public class TicketController {
                 model.addAttribute("message", errorMessage);
                 return "errors/404";
             }
-            var successMessage = """
-                        Вы успешно приобрели билет!
-                        """;
+            var successMessage = "Вы успешно приобрели билет!";
             model.addAttribute("message", successMessage);
             model.addAttribute("place", placeNumber);
             model.addAttribute("row", rowNumber);
