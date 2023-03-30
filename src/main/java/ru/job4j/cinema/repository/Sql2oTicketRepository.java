@@ -33,7 +33,11 @@ public class Sql2oTicketRepository implements TicketRepository {
             ticket.setId(generatedId);
             return Optional.of(ticket);
         } catch (Exception exception) {
-            return Optional.empty();
+            var errorMessage = """
+                          Не удалось приобрести билет на заданное место. Вероятно оно уже занято.
+                          Перейдите на страницу бронирования билетов и попробуйте снова.
+                        """;
+            throw new RuntimeException(errorMessage);
         }
     }
 

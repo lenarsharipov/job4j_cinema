@@ -6,19 +6,17 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.ui.ConcurrentModel;
 import ru.job4j.cinema.dto.SessionDto;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.RowPlaceService;
 import ru.job4j.cinema.service.SessionService;
 import ru.job4j.cinema.service.TicketService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -89,21 +87,14 @@ class TicketControllerTest {
     @Test
     public void whenCreateTicketThenGetSuccessPageWithMessage() {
         var expectedMessage = "Вы успешно приобрели билет!";
-        var request = mock(HttpServletRequest.class);
         var session = mock(HttpSession.class);
-        var expectedUser = new User(5, "name", "user1@email", "password");
         var expectedTicket = new Ticket(0, 2, 5, 3, 5);
         var ticketArgumentCaptor = ArgumentCaptor.forClass(Ticket.class);
-        when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("user")).thenReturn(expectedUser);
-        when(request.getParameter("id")).thenReturn("2");
-        when(request.getParameter("rowNumber")).thenReturn("5");
-        when(request.getParameter("placeNumber")).thenReturn("3");
         when(ticketService.save(ticketArgumentCaptor.capture()))
                 .thenReturn(Optional.of(expectedTicket));
 
         var model = new ConcurrentModel();
-        var view = ticketController.create(model, request);
+        var view = ticketController.create(model, expectedTicket, session);
         var actualMessage = model.getAttribute("message");
         var actualTicket = ticketArgumentCaptor.getValue();
 
@@ -123,20 +114,15 @@ class TicketControllerTest {
                           Не удалось приобрести билет на заданное место. Вероятно оно уже занято.
                           Перейдите на страницу бронирования билетов и попробуйте снова.
                         """;
-        var request = mock(HttpServletRequest.class);
+        var expectedException = new RuntimeException(expectedMessage);
         var session = mock(HttpSession.class);
-        var expectedUser = new User(5, "name", "user1@email", "password");
         var ticketArgumentCaptor = ArgumentCaptor.forClass(Ticket.class);
-        when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("user")).thenReturn(expectedUser);
-        when(request.getParameter("id")).thenReturn("2");
-        when(request.getParameter("rowNumber")).thenReturn("5");
-        when(request.getParameter("placeNumber")).thenReturn("3");
+
         when(ticketService.save(ticketArgumentCaptor.capture()))
-                .thenReturn(Optional.empty());
+                .thenThrow(expectedException);
 
         var model = new ConcurrentModel();
-        var view = ticketController.create(model, request);
+        var view = ticketController.create(model, ticketArgumentCaptor.capture(), session);
         var actualMessage = model.getAttribute("message");
 
         assertThat(view).isEqualTo("errors/404");

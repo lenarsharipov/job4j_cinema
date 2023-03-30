@@ -13,6 +13,7 @@ import java.util.Optional;
 @ThreadSafe
 @Service
 public class SimpleFileService implements FileService {
+    private final static String DEFAULT_POSTER_PATH = "files/default/p_default.jpg";
 
     private final FileRepository fileRepository;
 
@@ -34,15 +35,25 @@ public class SimpleFileService implements FileService {
         if (fileOptional.isEmpty()) {
             return Optional.empty();
         }
-        var content = readFileAsBytes(fileOptional.get().getPath());
+        byte[] content;
+        try {
+            content = readFileAsBytes(fileOptional.get().getPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return Optional.of(new FileDto(fileOptional.get().getName(), content));
     }
 
-    private byte[] readFileAsBytes(String path) {
+    /**
+     * В блоке catch при сценарии, когда изображение не найдено,
+     * загружается фото по-умолчанию вместо того, чтобы кидать исключение,
+     * которое остановит работу сервера
+     */
+    private byte[] readFileAsBytes(String path) throws IOException {
         try {
             return Files.readAllBytes(Path.of(path));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return Files.readAllBytes(Path.of(DEFAULT_POSTER_PATH));
         }
     }
 

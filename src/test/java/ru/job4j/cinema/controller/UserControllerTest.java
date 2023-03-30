@@ -26,38 +26,6 @@ class UserControllerTest {
         userController = new UserController(userService);
     }
 
-    @Test
-    public void whenRegisterNewUserThenRedirectToFilms() {
-        var user = new User(1, "user", "user@mail", "password");
-        var userArgumentCaptor = ArgumentCaptor.forClass(User.class);
-        when(userService.save(userArgumentCaptor.capture())).thenReturn(Optional.of(user));
-
-        var model = new ConcurrentModel();
-        var view = userController.register(model, user);
-        var actualUser = userArgumentCaptor.getValue();
-
-        assertThat(view).isEqualTo("redirect:/films");
-        assertThat(actualUser).isEqualTo(user);
-    }
-
-    @Test
-    public void whenRegisterNewUserWithNotUniqueEmailThen404AndException() {
-        var user = new User(1, "user", "user@mail", "password");
-        var userArgumentCaptor = ArgumentCaptor.forClass(User.class);
-        var expectedException = new RuntimeException("Пользователь с такой почтой уже существует");
-        when(userService.save(userArgumentCaptor.capture())).thenReturn(Optional.empty());
-
-        var model = new ConcurrentModel();
-        var view = userController.register(model, user);
-        var actualExceptionMessage = model.getAttribute("message");
-
-        assertThat(view).isEqualTo("errors/404");
-        assertThat(actualExceptionMessage).isEqualTo(expectedException.getMessage());
-    }
-
-
-
-
     /**
      * Тест на метод getRegistrationPage().
      * При обращении возвращает страницу регистрации пользователей.
@@ -69,7 +37,8 @@ class UserControllerTest {
 
     /**
      * Тест на метод register().
-     *
+     * При регистрации нового пользователя с уникальной почтой, пользователь сохраняется в БД,
+     * клиент переходит на страницу films.
      */
     @Test
     public void whenRequestToRegisterUserThenUserSavedAndGetVacanciesPage() {
@@ -87,11 +56,13 @@ class UserControllerTest {
 
     /**
      * Тест на метод register().
-     *
-     */@Test
+     * При регистрации нового пользователя с неуникальной почтой, выбрасывается исключение,
+     * клиент переходит на страницу errors/404, где отображается сообщение об ошибке.
+     */
+    @Test
     public void whenRequestToRegisterUserWithNotUniqueEmailThenGetErrorPageWithMessage() {
         var expectedException = new RuntimeException("Пользователь с такой почтой уже существует");
-        when(userService.save(any())).thenReturn(Optional.empty());
+        when(userService.save(any())).thenThrow(expectedException);
 
         var model = new ConcurrentModel();
         var view = userController.register(model, any());
@@ -110,6 +81,11 @@ class UserControllerTest {
         assertThat(userController.getLoginPage()).isEqualTo("users/login");
     }
 
+    /**
+     * Тест на метод loginUser().
+     * Клиент обращается к странице /users/login и вводит корректные данные,
+     * после чего он входит в систему и его переносит на
+     */
     @Test
     public void whenRequestToLoginThenLoggedAndGetVacanciesPage() {
         var user = new User(1, "user1@email", "user1", "password");
@@ -121,7 +97,7 @@ class UserControllerTest {
         when(session.getAttribute("user")).thenReturn(user);
 
         var model = new ConcurrentModel();
-        var view = userController.loginUser(user, model, request);
+        var view = userController.loginUser(user, model, session);
         var actualUser = session.getAttribute("user");
 
         assertThat(view).isEqualTo("users/login");
@@ -133,12 +109,12 @@ class UserControllerTest {
         var expectedException = new RuntimeException(
                 "Почта или пароль введены неверно"
         );
-        var request = mock(HttpServletRequest.class);
+        var session = mock(HttpSession.class);
         when(userService.findByEmailAndPassword(any(), any()))
                 .thenReturn(Optional.empty());
 
         var model = new ConcurrentModel();
-        var view = userController.loginUser(new User(), model, request);
+        var view = userController.loginUser(new User(), model, session);
         var actualExceptionMessage = model.getAttribute("error");
 
         assertThat(view).isEqualTo("users/login");

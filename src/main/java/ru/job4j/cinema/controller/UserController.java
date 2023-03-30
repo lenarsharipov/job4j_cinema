@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @ThreadSafe
@@ -31,12 +30,13 @@ public class UserController {
 
     @PostMapping({"/", "/register"})
     public String register(Model model, @ModelAttribute User user) {
-        var savedUser = userService.save(user);
-        if (savedUser.isEmpty()) {
-            model.addAttribute("message", "Пользователь с такой почтой уже существует");
+        try {
+            userService.save(user);
+            return "redirect:/films";
+        } catch (Exception exception) {
+            model.addAttribute("message", exception.getMessage());
             return "errors/404";
         }
-        return "redirect:/films";
     }
 
     @GetMapping("/login")
@@ -45,13 +45,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
+    public String loginUser(@ModelAttribute User user, Model model, HttpSession session) {
         var userOptional = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
         if (userOptional.isEmpty()) {
             model.addAttribute("error", "Почта или пароль введены неверно");
             return "users/login";
         }
-        var session = request.getSession();
         session.setAttribute("user", userOptional.get());
         return "redirect:/films";
     }

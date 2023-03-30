@@ -12,6 +12,7 @@ import java.util.Properties;
 import static java.util.Collections.emptyList;
 import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class Sql2oUserRepositoryTest {
     private static Sql2oUserRepository sql2oUserRepository;
@@ -91,10 +92,13 @@ class Sql2oUserRepositoryTest {
     }
 
     @Test
-    public void whenAddSecondUserWithEmailOfFirstOneThenFalse() {
+    public void whenAddSecondUserWithNotUniqueEmailThenException() {
         sql2oUserRepository.save(new User(0, "user1", "user1@mail.ru", "password1"));
         var user = new User(0, "user2", "user1@mail.ru", "password2");
-        assertThat(sql2oUserRepository.save(user)).isEqualTo(empty());
+
+        assertThatThrownBy(() -> sql2oUserRepository.save(user))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Пользователь с такой почтой уже существует");
     }
 
 }

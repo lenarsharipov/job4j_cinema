@@ -39,6 +39,12 @@ Checkstyle 8.42, Junit5, Assertj, H2 2.1.214, Mockito 3.5.13, Jacoco 0.8.7, Jcip
 <img src="/src/main/resources/static/img/readme/error_purchase.png" title="Error page"/>
 <br>
 <br>
+<img src="/src/main/resources/static/img/readme/poster_not_found1.png" title="Poster not found"/>
+<br>
+<br>
+<img src="/src/main/resources/static/img/readme/poster_not_found2.png" title="Poster not found"/>
+<br>
+<br>
 <h3>Контакты:</h3>
 <ul>
     <li><a href="mailto:lenarsharipov@gmail.com">lenarsharipov@gmail.com</a></li>

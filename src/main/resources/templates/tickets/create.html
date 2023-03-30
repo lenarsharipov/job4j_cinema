@@ -43,7 +43,8 @@
     </nav>
 
     <form class="mt-3" th:action="@{/tickets/create/{id}(id=*{filmSession.id})}" method="post">
-        <input type="hidden" name="id" th:field="*{filmSession.id}">
+        <input type="hidden" name="sessionId" th:value="*{filmSession.id}">
+        <input type="hidden" name="userId" th:value="*{user.id}">
         <div class="container mt-4">
             <div class="row">
                 <div class="col-4">

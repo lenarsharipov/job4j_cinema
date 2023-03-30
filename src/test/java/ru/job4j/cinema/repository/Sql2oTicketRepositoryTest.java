@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Properties;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class Sql2oTicketRepositoryTest {
     private static Sql2oTicketRepository sql2oTicketRepository;
@@ -52,13 +53,18 @@ class Sql2oTicketRepositoryTest {
     }
 
     @Test
-    public void whenSaveTicketThenSecondWithSameRowPlaceThenEmptyOptional() {
+    public void whenSaveTicketThenSecondWithSameRowPlaceThenException() {
         var ticket1 = new Ticket(0, 1, 1, 1, 1);
         var ticket2 = new Ticket(0, 1, 1, 1, 2);
-        var ticketOptional1 = sql2oTicketRepository.save(ticket1);
-        var ticketOptional2 = sql2oTicketRepository.save(ticket2);
-        assertThat(ticketOptional1).isNotEmpty();
-        assertThat(ticketOptional2).isEmpty();
+        sql2oTicketRepository.save(ticket1);
+        var errorMessage = """
+                          Не удалось приобрести билет на заданное место. Вероятно оно уже занято.
+                          Перейдите на страницу бронирования билетов и попробуйте снова.
+                        """;
+        assertThatThrownBy(
+                () -> sql2oTicketRepository.save(ticket2))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage(errorMessage);
     }
 
     @Test
