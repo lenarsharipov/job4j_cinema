@@ -5,12 +5,28 @@ Web-приложение "Кинотеатр" позволяет просмат�
 1. Регистрация/Вход
 2. Вывод киносеансов и фильмов
 3. Покупка билетов
+____________________________________________
+<h3>Стек технологий:</h3>
+<ul>
+    <li>Java 17</li>
+    <li>Postgresql 14</li>
+    <li>Bootstrap 5.2.3</li>
+    <li>Spring Boot 2.7.6</li>
+    <li>Liquibase 4.15.0</li>
+    <li>Sql2o 1.6.0</li>
+    <li>Checkstyle 8.42</li>
+    <li>Junit5</li>
+    <li>Assertj</li>
+    <li>H2 2.1.214</li> 
+    <li>Mockito 3.5.13</li> 
+    <li>Jacoco 0.8.7</li> 
+    <li>Jcip-annotations 1.0</li>
+</ul>
 
-<h3>Стек технологий:</h3>Java 17, Postgresql 14, Bootstrap 5.2.3, Spring Boot 2.7.6, Liquibase 4.15.0, Sql2o 1.6.0,
-Checkstyle 8.42, Junit5, Assertj, H2 2.1.214, Mockito 3.5.13, Jacoco 0.8.7, Jcip-annotations 1.0
-
+____________________________________________
 <h3>Окружение:</h3>Java 17, Maven 3.8.7, Postgresql 14
 
+____________________________________________
 <h3>Взаимодействие с приложением:</h3>
 <img src="/src/main/resources/static/img/readme/main.png" title="Main page"/>
 <br>
@@ -45,6 +61,7 @@ Checkstyle 8.42, Junit5, Assertj, H2 2.1.214, Mockito 3.5.13, Jacoco 0.8.7, Jcip
 <img src="/src/main/resources/static/img/readme/poster_not_found2.png" title="Poster not found"/>
 <br>
 <br>
+____________________________________________
 <h3>Контакты:</h3>
 <ul>
     <li><a href="mailto:lenarsharipov@gmail.com">lenarsharipov@gmail.com</a></li>
