@@ -28,39 +28,39 @@ ____________________________________________
 
 ____________________________________________
 <h3>Взаимодействие с приложением:</h3>
+<p>Главная страница</p>
 <img src="/src/main/resources/static/img/readme/main.png" title="Main page"/>
 <br>
-<br>
+<p>Страница регистрации нового пользователя</p>
 <img src="/src/main/resources/static/img/readme/register.png" title="New user registration page"/>
 <br>
-<br>
+<p>Ошибка регистрации пользователя</p>
 <img src="/src/main/resources/static/img/readme/register_error.png" title="Error"/>
 <br>
-<br>
+<p>Список фильмов в кинотеатре</p>
 <img src="/src/main/resources/static/img/readme/films.png" title="Films page"/>
 <br>
-<br>
+<p>Страница фильма</p>
 <img src="/src/main/resources/static/img/readme/film_one.png" title="Film page"/>
 <br>
-<br>
+<p>Страница с сеансами</p>
 <img src="/src/main/resources/static/img/readme/sessions.png" title="Sessions page"/>
 <br>
-<br>
+<p>Страница покупки билета</p>
 <img src="/src/main/resources/static/img/readme/ticket.png" title="Ticket page"/>
 <br>
-<br>
+<p>Страница успешной покупки</p>
 <img src="/src/main/resources/static/img/readme/success_purchase.png" title="Successful purchase page"/>
 <br>
-<br>
+<p>Ошибка покупки</p>
 <img src="/src/main/resources/static/img/readme/error_purchase.png" title="Error page"/>
 <br>
-<br>
+<p>Дефолтный постер</p>
 <img src="/src/main/resources/static/img/readme/poster_not_found1.png" title="Poster not found"/>
 <br>
-<br>
+<p>Дефолтный постер</p>
 <img src="/src/main/resources/static/img/readme/poster_not_found2.png" title="Poster not found"/>
-<br>
-<br>
+
 ____________________________________________
 <h3>Контакты:</h3>
 <ul>
