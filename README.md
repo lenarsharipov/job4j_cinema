@@ -1,12 +1,13 @@
-## Проект "job4j_cinema"
+## Cinema Project
 
-Web-приложение "Кинотеатр" позволяет просматривать сеансы фильмов, покупать билеты в кинотеатр (один, не сеть).
-Приложение имеет следующий функционал:
-1. Регистрация/Вход
-2. Вывод киносеансов и фильмов
-3. Покупка билетов
+Cinema is a web application that allows users to book movie tickets online. It provides a platform for users to view available movies, select seats, and make reservations. This project is built using the Java programming language and the Spring Framework.
+
+Functionality:
+1. Authentication/Logging
+2. Listing existing movies and related sessions
+3. Buy ticket
 ____________________________________________
-<h3>Стек технологий:</h3>
+<h3>Stack:</h3>
 <ul>
     <li>Java 17</li>
     <li>Postgresql 14</li>
@@ -24,45 +25,45 @@ ____________________________________________
 </ul>
 
 ____________________________________________
-<h3>Окружение:</h3>Java 17, Maven 3.8.7, Postgresql 14
+<h3>Required environment:</h3>Java 17, Maven 3.8.7, Postgresql 14
 
 ____________________________________________
-<h3>Взаимодействие с приложением:</h3>
-<p>Главная страница</p>
+<h3>Screenshots:</h3>
+<p>Main</p>
 <img src="/src/main/resources/static/img/readme/main.png" title="Main page"/>
 <br>
-<p>Страница регистрации нового пользователя</p>
+<p>Register new user</p>
 <img src="/src/main/resources/static/img/readme/register.png" title="New user registration page"/>
 <br>
-<p>Ошибка регистрации пользователя</p>
+<p>Error</p>
 <img src="/src/main/resources/static/img/readme/register_error.png" title="Error"/>
 <br>
-<p>Список фильмов в кинотеатре</p>
+<p>Listed movies</p>
 <img src="/src/main/resources/static/img/readme/films.png" title="Films page"/>
 <br>
-<p>Страница фильма</p>
+<p>Movie's page</p>
 <img src="/src/main/resources/static/img/readme/film_one.png" title="Film page"/>
 <br>
-<p>Страница с сеансами</p>
+<p>Sessions</p>
 <img src="/src/main/resources/static/img/readme/sessions.png" title="Sessions page"/>
 <br>
-<p>Страница покупки билета</p>
+<p>Buy ticket</p>
 <img src="/src/main/resources/static/img/readme/ticket.png" title="Ticket page"/>
 <br>
-<p>Страница успешной покупки</p>
+<p>Success</p>
 <img src="/src/main/resources/static/img/readme/success_purchase.png" title="Successful purchase page"/>
 <br>
-<p>Ошибка покупки</p>
+<p>Error</p>
 <img src="/src/main/resources/static/img/readme/error_purchase.png" title="Error page"/>
 <br>
-<p>Дефолтный постер</p>
+<p>Default poster</p>
 <img src="/src/main/resources/static/img/readme/poster_not_found1.png" title="Poster not found"/>
 <br>
-<p>Дефолтный постер</p>
+<p>Default poster</p>
 <img src="/src/main/resources/static/img/readme/poster_not_found2.png" title="Poster not found"/>
 
 ____________________________________________
-<h3>Контакты:</h3>
+<h3>Contacts:</h3>
 <ul>
     <li><a href="mailto:lenarsharipov@gmail.com">lenarsharipov@gmail.com</a></li>
     <li><a href="https://t.me/LenarSharipov">telegram</a></li>
